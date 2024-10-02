@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .username("user")
 //                        .password("{bcrypt}$2a$12$bxGVTLZPr7vrBrMOLzTrdOwv63l7ZhrOGpaGwlVJBotaBywPFmU9m")
                         .password(passwordEncoder().encode("100"))
-                        .roles("USER")
+                        .authorities("USER")
                         .build();
 
         UserDetails admin =
@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .username("admin")
 //                        .password("{bcrypt}$2a$12$bxGVTLZPr7vrBrMOLzTrdOwv63l7ZhrOGpaGwlVJBotaBywPFmU9m")
                         .password(passwordEncoder().encode("100"))
-                        .roles("ADMIN", "USER")
+                        .authorities("ADMIN", "USER")
                         .build();
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         if (!jdbcUserDetailsManager.userExists(user.getUsername())) {

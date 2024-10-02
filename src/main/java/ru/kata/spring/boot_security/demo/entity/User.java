@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
 //    @JoinTable(
 //            name = "users_roles",
@@ -41,7 +41,7 @@ public class User implements UserDetails {
 //                    name = "name", referencedColumnName = "name"),
 //            inverseJoinColumns = @JoinColumn(
 //                    name = "role_authority", referencedColumnName = "authority"))
-    private Set<Role> roles = new HashSet<>();
+    private Collection<Role> roles;
 
 
     public User() {
@@ -51,6 +51,8 @@ public class User implements UserDetails {
     public User(String name, String password, Collection<? extends GrantedAuthority> roles) {
         this.username = name;
         this.password = password;
+        this.enabled = true;
+        this.roles = (Collection<Role>) roles;
     }
 
     @Override
@@ -111,10 +113,10 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
