@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private Collection<GrantedAuthority> getAuthorities(Collection<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+            authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
         }
         return authorities;
     }

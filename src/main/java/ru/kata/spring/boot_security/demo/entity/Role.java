@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "roles")
+@Table(name = "authorities")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -17,18 +17,24 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     @Nullable
-    private String role;
+    private String authority;
 
-  /*  @Nullable
-    private String role;*/
+    @Nullable
+    private String username;
+
 
 
     @Transient
     @ManyToMany/*(mappedBy = "users_roles")*/
     private List<User> users;
 
-    public void setRole(@Nullable String name) {
-        this.role = name;
+    @Nullable
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@Nullable String username) {
+        this.username = username;
     }
 
     public List<User> getUsers() {
@@ -47,14 +53,13 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    @Nullable
-    public String getRole() {
-        return role;
+    public void setAuthority(@Nullable String name) {
+        this.authority = name;
     }
 
     @Override
     public String getAuthority() {
-        return this.role;
+        return this.authority;
     }
 }
 

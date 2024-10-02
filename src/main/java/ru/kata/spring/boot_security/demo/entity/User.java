@@ -25,11 +25,11 @@ public class User implements UserDetails {
 
     private String email;
 
-//    @Nullable
-//    private boolean enabled;
+    @Nullable
+    private boolean enabled;
 
     @Transient
-    @ManyToMany(/*cascade = CascadeType.PERSIST, */fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -120,6 +120,10 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
