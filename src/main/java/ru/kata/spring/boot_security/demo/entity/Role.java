@@ -23,8 +23,8 @@ public class Role implements GrantedAuthority {
     private String role;*/
 
 
-//    @Transient
-    @ManyToMany(mappedBy = "users_roles")
+    @Transient
+    @ManyToMany/*(mappedBy = "users_roles")*/
     private List<User> users;
 
     public void setRole(@Nullable String name) {

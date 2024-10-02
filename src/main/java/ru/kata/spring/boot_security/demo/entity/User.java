@@ -25,10 +25,10 @@ public class User implements UserDetails {
 
     private String email;
 
-    @Nullable
-    private boolean enabled;
+//    @Nullable
+//    private boolean enabled;
 
-//    @Transient
+    @Transient
     @ManyToMany(/*cascade = CascadeType.PERSIST, */fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
@@ -48,7 +48,7 @@ public class User implements UserDetails {
 
     }
 
-    public User(String name, String password) {
+    public User(String name, String password, Collection<? extends GrantedAuthority> roles) {
         this.username = name;
         this.password = password;
     }
@@ -111,11 +111,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        return true;
     }
 
     public Set<Role> getRoles() {
